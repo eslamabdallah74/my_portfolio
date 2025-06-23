@@ -14,9 +14,6 @@ import AppNavigation from '@/components/AppNavigation.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import { useTheme } from '@/composables/useTheme';
 
-// Initialize theme
-const { isDark } = useTheme();
-
 onMounted(() => {
   // Add smooth scrolling for anchor links
   document.addEventListener('click', (e) => {
