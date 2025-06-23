@@ -1,11 +1,12 @@
 <template>
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
     <div class="container-custom">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-center md:justify-between h-16 min-w-0 w-full">
         <!-- Logo -->
         <router-link 
           to="/" 
-          class="text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
+          class="mx-auto md:mx-0 flex-shrink min-w-0 text-lg sm:text-xl md:text-2xl font-bold text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors truncate"
+          style="max-width: 70vw;"
         >
           {{ personalInfo.name }}
         </router-link>

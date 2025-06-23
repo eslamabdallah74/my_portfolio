@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-gray-900 text-green-400 font-mono py-12">
-    <div class="container-custom flex flex-col items-center justify-center min-h-[300px]">
+    <div class="container-custom flex flex-col items-center justify-center min-h-[300px] mx-4 md:mx-0">
       <div class="w-full max-w-2xl bg-gray-950 rounded-xl shadow-lg p-6">
         <div v-for="(line, i) in output" :key="i" class="mb-1">
           <span v-if="line.prompt">&gt; </span><span v-html="line.text"></span>
