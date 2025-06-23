@@ -63,64 +63,55 @@
 
         <!-- Contact Form -->
         <div class="card p-8">
-          <form @submit.prevent="handleSubmit" class="space-y-6">
+          <form 
+            action="https://formspree.io/f/xldnpllo" 
+            method="POST" 
+            class="space-y-6"
+          >
             <div>
               <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Name *
               </label>
               <input
                 id="name"
-                v-model="form.name"
+                name="name"
                 type="text"
                 required
                 class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all"
                 placeholder="Your full name"
-                :class="{ 'border-red-500': errors.name }"
               />
-              <p v-if="errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.name }}</p>
             </div>
-
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email *
               </label>
               <input
                 id="email"
-                v-model="form.email"
+                name="email"
                 type="email"
                 required
                 class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all"
                 placeholder="your.email@example.com"
-                :class="{ 'border-red-500': errors.email }"
               />
-              <p v-if="errors.email" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.email }}</p>
             </div>
-
             <div>
               <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Message *
               </label>
               <textarea
                 id="message"
-                v-model="form.message"
+                name="message"
                 required
                 rows="6"
                 class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all resize-none"
                 placeholder="Tell me about your project..."
-                :class="{ 'border-red-500': errors.message }"
               ></textarea>
-              <p v-if="errors.message" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.message }}</p>
             </div>
-
             <button
               type="submit"
-              :disabled="isSubmitting"
-              class="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+              class="w-full btn-primary flex items-center justify-center"
             >
-              <span v-if="isSubmitting" class="mr-2">
-                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              </span>
-              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+              Send Message
             </button>
           </form>
         </div>
