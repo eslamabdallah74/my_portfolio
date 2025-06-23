@@ -181,27 +181,6 @@ const validateForm = (): boolean => {
   return Object.keys(errors).length === 0;
 };
 
-const handleSubmit = async () => {
-  if (!validateForm() || isSubmitting.value) return;
-  
-  isSubmitting.value = true;
-  
-  try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Reset form
-    Object.assign(form, { name: '', email: '', message: '' });
-    
-    // Show success message
-    showSuccess.value = true;
-  } catch (error) {
-    console.error('Error sending message:', error);
-  } finally {
-    isSubmitting.value = false;
-  }
-};
-
 // Inline SVGs as functional components for GitHub and LinkedIn
 const GithubIcon = () => h('svg', {
   fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', 'stroke-width': '1.5', xmlns: 'http://www.w3.org/2000/svg', class: 'w-5 h-5'
@@ -215,7 +194,6 @@ const GithubIcon = () => h('svg', {
 const getSocialIcon = (iconName: string) => {
   const iconMap: Record<string, any> = {
     github: GithubIcon,
-    linkedin: () => 'L',
     envelope: EnvelopeIcon,
     phone: PhoneIcon
   };
