@@ -1,0 +1,225 @@
+<template>
+  <section id="contact" class="section-padding bg-white dark:bg-gray-900">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          Let's Work Together
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Get in Touch</h3>
+            <div class="space-y-4">
+              <div class="flex items-center">
+                <EnvelopeIcon class="w-5 h-5 text-primary-600 dark:text-primary-400 mr-3" />
+                <a 
+                  :href="`mailto:${personalInfo.email}`"
+                  class="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                >
+                  {{ personalInfo.email }}
+                </a>
+              </div>
+              <div class="flex items-center">
+                <MapPinIcon class="w-5 h-5 text-primary-600 dark:text-primary-400 mr-3" />
+                <span class="text-gray-600 dark:text-gray-300">{{ personalInfo.location }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Connect With Me</h4>
+            <div class="flex space-x-4">
+              <a 
+                v-for="social in socialLinks" 
+                :key="social.name"
+                :href="social.url" 
+                target="_blank"
+                class="p-3 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-all duration-200 transform hover:scale-105"
+                :aria-label="`Connect on ${social.name}`"
+              >
+                <component :is="getSocialIcon(social.icon)" class="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          <!-- Availability Status -->
+          <div class="p-6 rounded-2xl bg-gradient-to-r from-accent-50 to-primary-50 dark:from-accent-900/20 dark:to-primary-900/20 border border-accent-100 dark:border-accent-800">
+            <div class="flex items-center mb-2">
+              <div class="w-3 h-3 bg-accent-500 rounded-full mr-2 animate-pulse"></div>
+              <span class="font-medium text-gray-900 dark:text-white">Currently Available</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              I'm open to new opportunities and interesting projects. Let's discuss your ideas!
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card p-8">
+          <form @submit.prevent="handleSubmit" class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Name *
+              </label>
+              <input
+                id="name"
+                v-model="form.name"
+                type="text"
+                required
+                class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all"
+                placeholder="Your full name"
+                :class="{ 'border-red-500': errors.name }"
+              />
+              <p v-if="errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.name }}</p>
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Email *
+              </label>
+              <input
+                id="email"
+                v-model="form.email"
+                type="email"
+                required
+                class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all"
+                placeholder="your.email@example.com"
+                :class="{ 'border-red-500': errors.email }"
+              />
+              <p v-if="errors.email" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.email }}</p>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Message *
+              </label>
+              <textarea
+                id="message"
+                v-model="form.message"
+                required
+                rows="6"
+                class="w-full px-4 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-800 focus:border-primary-500 dark:focus:border-primary-400 transition-all resize-none"
+                placeholder="Tell me about your project..."
+                :class="{ 'border-red-500': errors.message }"
+              ></textarea>
+              <p v-if="errors.message" class="mt-1 text-sm text-red-600 dark:text-red-400">{{ errors.message }}</p>
+            </div>
+
+            <button
+              type="submit"
+              :disabled="isSubmitting"
+              class="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            >
+              <span v-if="isSubmitting" class="mr-2">
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+              </span>
+              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Success Message -->
+      <div 
+        v-if="showSuccess"
+        class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+        @click="showSuccess = false"
+      >
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 max-w-md w-full mx-auto text-center shadow-2xl transform animate-slide-up">
+          <div class="w-16 h-16 bg-accent-100 dark:bg-accent-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckIcon class="w-8 h-8 text-accent-600 dark:text-accent-400" />
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Message Sent!</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Thank you for reaching out. I'll get back to you within 24 hours.
+          </p>
+          <button 
+            @click="showSuccess = false"
+            class="btn-primary"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup lang="ts">
+import { ref, reactive } from 'vue';
+import { EnvelopeIcon, MapPinIcon, CheckIcon } from '@heroicons/vue/24/outline';
+import { personalInfo, socialLinks } from '@/data/portfolio';
+import type { ContactForm } from '@/types';
+
+const form = reactive<ContactForm>({
+  name: '',
+  email: '',
+  message: ''
+});
+
+const errors = reactive<Partial<ContactForm>>({});
+const isSubmitting = ref(false);
+const showSuccess = ref(false);
+
+const validateForm = (): boolean => {
+  Object.keys(errors).forEach(key => delete errors[key as keyof ContactForm]);
+  
+  if (!form.name.trim()) {
+    errors.name = 'Name is required';
+  }
+  
+  if (!form.email.trim()) {
+    errors.email = 'Email is required';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    errors.email = 'Please enter a valid email address';
+  }
+  
+  if (!form.message.trim()) {
+    errors.message = 'Message is required';
+  } else if (form.message.trim().length < 10) {
+    errors.message = 'Message must be at least 10 characters';
+  }
+  
+  return Object.keys(errors).length === 0;
+};
+
+const handleSubmit = async () => {
+  if (!validateForm() || isSubmitting.value) return;
+  
+  isSubmitting.value = true;
+  
+  try {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Reset form
+    Object.assign(form, { name: '', email: '', message: '' });
+    
+    // Show success message
+    showSuccess.value = true;
+  } catch (error) {
+    console.error('Error sending message:', error);
+  } finally {
+    isSubmitting.value = false;
+  }
+};
+
+const getSocialIcon = (iconName: string) => {
+  // This would typically map to actual social media icons
+  // For now, using heroicons as placeholders
+  const iconMap: Record<string, any> = {
+    github: EnvelopeIcon,
+    linkedin: EnvelopeIcon,
+    twitter: EnvelopeIcon,
+    email: EnvelopeIcon
+  };
+  return iconMap[iconName] || EnvelopeIcon;
+};
+</script>
