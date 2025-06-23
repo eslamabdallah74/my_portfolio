@@ -8,7 +8,7 @@ export const projects: Project[] = [
     technologies: ['GraphQL', 'Figma', 'Full Stack'],
     challenge: 'Integrated dynamic backend with GraphQL and improved attendee system efficiency.',
     liveUrl: 'https://elkheta.com',
-    image: 'src/assets/elkheta.png',
+    image: new URL('../assets/elkheta.png', import.meta.url).href,
     // githubUrl: '', // Add if available 
   },
   {
@@ -18,7 +18,7 @@ export const projects: Project[] = [
     technologies: ['Full Stack'],
     challenge: 'Implemented new features and roles while improving code quality and design.',
     liveUrl: 'https://dwam.app/',
-    image: 'src/assets/ibraight.png',
+    image: new URL('../assets/ibraight.png', import.meta.url).href,
     // githubUrl: '', // Add if available
   },
   {
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     technologies: ['Frontend', 'HTML', 'CSS', 'JavaScript', 'TypeScript'],
     challenge: 'Built a responsive, accessible, and engaging website to support a national awareness campaign.',
     liveUrl: 'https://eslamabdallah74.github.io/razi/',
-    image: 'src/assets/razi.png',
+    image: new URL('../assets/razi.png', import.meta.url).href,
   },
   {
     id: 'du-gateau-cake',
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     challenge: 'Built a visually appealing and user-friendly e-commerce platform for cake sales, optimizing for performance and accessibility.',
     liveUrl: 'https://du-gateau.vercel.app/',
     githubUrl: 'https://github.com/eslamabdallah74/du-gateau',
-    image: 'src/assets/du-gateau.png',
+    image: new URL('../assets/du-gateau.png', import.meta.url).href,
   },
 ];
 
