@@ -20,7 +20,6 @@
           <!-- Date and Read Time -->
           <div class="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
             <time>{{ formatDate(post.date) }}</time>
-            <span>{{ post.readTime }} min read</span>
           </div>
 
           <!-- Title -->
@@ -52,16 +51,6 @@
         </article>
       </div>
 
-      <!-- Coming Soon Notice -->
-      <div class="text-center mt-12">
-        <div class="inline-block p-6 rounded-2xl bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 shadow-sm">
-          <p class="text-gray-600 dark:text-gray-300">
-            <strong>Coming Soon:</strong> Full blog functionality with markdown support and CMS integration.
-            <br>
-            <span class="text-sm">These are preview posts to demonstrate the layout and design.</span>
-          </p>
-        </div>
-      </div>
     </div>
   </section>
 </template>

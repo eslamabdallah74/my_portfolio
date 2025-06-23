@@ -17,6 +17,7 @@ export interface BlogPost {
   date: string;
   readTime: number;
   tags: string[];
+  externalUrl?: string;
 }
 
 export interface Skill {

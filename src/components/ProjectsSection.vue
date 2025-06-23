@@ -16,6 +16,8 @@
           :key="project.id"
           class="card p-6 group"
         >
+          <!-- Project Image -->
+          <img v-if="project.image" :src="project.image" :alt="project.title + ' screenshot'" class="w-full h-48 object-cover rounded-2xl mb-4 border border-gray-200 dark:border-gray-700" />
           <!-- Project Header -->
           <div class="flex items-start justify-between mb-4">
             <h3 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">

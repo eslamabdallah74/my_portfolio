@@ -25,34 +25,8 @@
             </a>
           </nav>
         </div>
-
-        <!-- Contact Info -->
-        <div>
-          <h4 class="text-lg font-semibold mb-4">Get In Touch</h4>
-          <div class="space-y-2">
-            <a 
-              :href="`mailto:${personalInfo.email}`"
-              class="block text-gray-300 hover:text-primary-400 transition-colors"
-            >
-              {{ personalInfo.email }}
-            </a>
-            <p class="text-gray-300">{{ personalInfo.location }}</p>
-          </div>
-
-          <!-- Social Links -->
-          <div class="flex space-x-4 mt-4">
-            <a 
-              v-for="social in socialLinks" 
-              :key="social.name"
-              :href="social.url" 
-              target="_blank"
-              class="text-gray-400 hover:text-primary-400 transition-colors"
-              :aria-label="`Connect on ${social.name}`"
-            >
-              <component :is="getSocialIcon(social.icon)" class="w-5 h-5" />
-            </a>
-          </div>
-        </div>
+        
+        
       </div>
 
       <!-- Bottom Bar -->
@@ -93,9 +67,9 @@ const scrollToSection = (href: string) => {
 const getSocialIcon = (iconName: string) => {
   const iconMap: Record<string, any> = {
     github: EnvelopeIcon,
-    linkedin: EnvelopeIcon,
-    twitter: EnvelopeIcon,
-    email: EnvelopeIcon
+    linkedin: () => 'L',
+    envelope: EnvelopeIcon,
+    phone: EnvelopeIcon
   };
   return iconMap[iconName] || EnvelopeIcon;
 };
