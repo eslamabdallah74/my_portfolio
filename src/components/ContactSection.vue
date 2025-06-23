@@ -144,18 +144,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, h } from 'vue';
+import { ref, h } from 'vue';
 import { EnvelopeIcon, MapPinIcon, CheckIcon, PhoneIcon } from '@heroicons/vue/24/outline';
 import { personalInfo, socialLinks } from '@/data/portfolio';
-import type { ContactForm } from '@/types';
 
-const form = reactive<ContactForm>({
-  name: '',
-  email: '',
-  message: ''
-});
-
-const errors = reactive<Partial<ContactForm>>({});
 const showSuccess = ref(false);
 
 const getSocialIcon = (iconName: string) => {
